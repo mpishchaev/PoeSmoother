@@ -161,9 +161,9 @@ public static class Program
             {
                 Console.WriteLine($"Applying patch: {patch.Name}");
                 patch.Apply(fileTree);
+                index.Save();
             }
 
-            index.Save();
             Console.WriteLine();
             Console.WriteLine("All patches applied successfully!");
         }
@@ -223,9 +223,9 @@ public static class Program
             {
                 Console.WriteLine($"Applying patch: {patches[patchIndex].Name}");
                 patches[patchIndex].Apply(fileTree);
+                indexInstance.Save();
             }
 
-            indexInstance.Save();
             Console.WriteLine();
             Console.WriteLine("Selected patches applied successfully!");
         }
