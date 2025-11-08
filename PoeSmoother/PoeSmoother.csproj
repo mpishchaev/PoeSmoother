@@ -17,6 +17,7 @@
   <ItemGroup>
     <None Update="oo2core.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 
