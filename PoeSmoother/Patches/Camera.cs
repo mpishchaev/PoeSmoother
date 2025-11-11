@@ -55,35 +55,10 @@ public class Camera : IPatch
                         continue;
                     }
 
-                    List<string> lines = data.Split("\r\n").ToList();
-
-                    for (int i = 0; i < lines.Count; i++)
-                    {
-                        string? foundFunction = _functions.FirstOrDefault(func => lines[i].Contains(func));
-
-                        while (foundFunction != null)
-                        {
-                            int start = lines[i].IndexOf(foundFunction);
-                            int end = lines[i].IndexOf(';', start);
-
-                            if (start - 1 > 0 && lines[i][start - 1] == '.')
-                            {
-                                start -= 1;
-                                while (start - 1 > 0 && (char.IsLetterOrDigit(lines[i][start - 1]) || lines[i][start - 1] == '_'))
-                                {
-                                    start -= 1;
-                                }
-                            }
-
-                            if (end >= 0)
-                            {
-                                lines[i] = lines[i][..start] + lines[i][(end + 1)..];
-                            }
-                            foundFunction = _functions.FirstOrDefault(func => lines[i].Contains(func));
-                        }
-                    }
-                    string newData = string.Join("\r\n", lines);
-                    var newBytes = System.Text.Encoding.Unicode.GetBytes(newData);
+                    string pattern = @"(?:[\w_]+\.)?(?:" + string.Join("|", _functions.Select(System.Text.RegularExpressions.Regex.Escape)) + @")\s*\([^)]*\)\s*;";
+                    data = System.Text.RegularExpressions.Regex.Replace(data, pattern, "");
+                    
+                    var newBytes = System.Text.Encoding.Unicode.GetBytes(data);
                     record.Write(newBytes);
                 }
             }
