@@ -1,5 +1,5 @@
-![GitHub Repo stars](https://img.shields.io/github/stars/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23DEA521)
-![GitHub Release](https://img.shields.io/github/v/release/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%2329903b)
+![GitHub Repo stars](https://img.shields.io/github/stars/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23282828)
+![GitHub Release](https://img.shields.io/github/v/release/Gineticus/PoeSmoother?style=for-the-badge&logo=github&color=%23282828)
 
 # PoeSmoother
 
