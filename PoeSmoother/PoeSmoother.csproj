@@ -15,16 +15,16 @@
     <DebugSymbols>false</DebugSymbols>
     <!-- <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile> -->
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="LibGGPK3.LibBundledGGPK3" Version="2.6.10" />
-  </ItemGroup>
   
   <ItemGroup>
     <None Update="oo2core.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="LibGGPK3.LibBundledGGPK3" Version="2.6.11" />
   </ItemGroup>
 
 </Project>

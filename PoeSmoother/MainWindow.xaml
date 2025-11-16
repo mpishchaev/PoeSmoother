@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="PoE Smoother" Height="550" Width="550"
         WindowStartupLocation="CenterScreen"
-        Background="#1E1E1E">
+        Background="{StaticResource DarkBackground}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,14 +29,14 @@
                        FontSize="20" 
                        FontWeight="Bold" 
                        VerticalAlignment="Center"
-                       Foreground="#E0E0E0"/>
+                       Foreground="{StaticResource DarkTextPrimary}"/>
             
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Game:" 
                            VerticalAlignment="Center" 
                            Margin="0,0,8,0"
                            FontSize="12"
-                           Foreground="#B0B0B0"/>
+                           Foreground="{StaticResource DarkTextSecondary}"/>
                 <ComboBox x:Name="GameSelector"
                           Width="80"
                           FontSize="12"
@@ -50,7 +50,7 @@
         </Grid>
 
         <!-- GGPK Path Selection -->
-        <GroupBox Grid.Row="1" Header="GGPK File Path" Margin="0,0,0,8" FontSize="12">
+        <GroupBox Grid.Row="1" Header="GGPK File Path" Margin="0,0,0,8" FontSize="12" FontWeight="SemiBold">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -74,7 +74,7 @@
         </GroupBox>
 
         <!-- Patches Section -->
-        <GroupBox Grid.Row="2" Header="Available Patches" Margin="0,0,0,8" FontSize="12">
+        <GroupBox Grid.Row="2" Header="Available Patches" Margin="0,0,0,8" FontSize="12" FontWeight="SemiBold">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -107,7 +107,7 @@
                                    VerticalAlignment="Center" 
                                    Margin="0,0,8,0"
                                    FontSize="11"
-                                   Foreground="#E0E0E0"/>
+                                   Foreground="{StaticResource DarkTextPrimary}"/>
                         <Slider x:Name="ZoomSlider"
                                 Width="120"
                                 Minimum="1.2"
@@ -124,7 +124,7 @@
                                    VerticalAlignment="Center"
                                    Margin="8,0,0,0"
                                    FontSize="11"
-                                   Foreground="#B0B0B0"/>
+                                   Foreground="{StaticResource DarkTextSecondary}"/>
                     </StackPanel>
                 </Grid>
 
@@ -133,24 +133,24 @@
                     <ItemsControl x:Name="PatchesItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="#3F3F46" 
-                                        BorderThickness="0,0,0,1" 
+                                <Border BorderBrush="{StaticResource DarkBorder}" 
+                                        BorderThickness="0" 
                                         Padding="4"
-                                        Background="#2D2D30"
-                                        Margin="0,1"
+                                        Background="{StaticResource DarkSurface}"
+                                        Margin="0,0,0,2"
                                         CornerRadius="2">
                                     <CheckBox IsChecked="{Binding IsSelected}"
                                               FontWeight="SemiBold"
                                               FontSize="12"
-                                              Foreground="#E0E0E0">
+                                              Foreground="{StaticResource DarkTextPrimary}">
                                         <StackPanel>
                                             <TextBlock Text="{Binding Name}" 
                                                        FontWeight="SemiBold"
                                                        FontSize="12"
-                                                       Foreground="#E0E0E0"/>
+                                                       Foreground="{StaticResource DarkTextPrimary}"/>
                                             <TextBlock Text="{Binding Description}" 
                                                        Margin="0,1,0,0"
-                                                       Foreground="#B0B0B0"
+                                                       Foreground="{StaticResource DarkTextSecondary}"
                                                        TextWrapping="Wrap"
                                                        FontSize="10"/>
                                         </StackPanel>
@@ -168,7 +168,7 @@
                      Height="20" 
                      Margin="8,0,4,8"
                      x:Name="ProgressBar"
-                     Visibility="Collapsed"/>
+                     Visibility="Collapsed" />
 
         <!-- Action Buttons -->
         <Grid Grid.Row="4">
@@ -182,8 +182,8 @@
                        Grid.Column="0"
                        VerticalAlignment="Center"
                        FontSize="11"
-                       Foreground="#B0B0B0"
-                       Margin="5,0"/>
+                       Foreground="{StaticResource DarkTextSecondary}"
+                       Margin="8,0"/>
 
             <Button Grid.Column="1" 
                     Content="Apply Patches" 

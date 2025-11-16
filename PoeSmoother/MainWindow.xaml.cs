@@ -124,8 +124,7 @@ public partial class MainWindow : Window
         var openFileDialog = new OpenFileDialog
         {
             Filter = "GGPK Files (*.ggpk;*.bin)|*.ggpk;*.bin|All Files (*.*)|*.*",
-            Title = "Select GGPK or Index File",
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)
+            Title = "Select GGPK or Index File"
         };
 
         if (openFileDialog.ShowDialog() == true)
@@ -177,8 +176,7 @@ public partial class MainWindow : Window
 
         if (selectedPatches.Count == 0)
         {
-            MessageBox.Show("Please select at least one patch to apply.", "No Patches Selected",
-                MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Please select at least one patch to apply.", "No Patches Selected");
             return;
         }
 
@@ -189,8 +187,7 @@ public partial class MainWindow : Window
     {
         if (string.IsNullOrEmpty(_ggpkPath) || !File.Exists(_ggpkPath))
         {
-            MessageBox.Show("Please select a valid GGPK file first.", "Invalid File",
-                MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Please select a valid GGPK file first.", "Invalid File");
             return;
         }
 
@@ -229,14 +226,12 @@ public partial class MainWindow : Window
             });
 
             StatusTextBlock.Text = $"Successfully applied {patchesToApply.Count} patch(es)!";
-            MessageBox.Show($"Successfully applied {patchesToApply.Count} patch(es)!", "Success",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show($"Successfully applied {patchesToApply.Count} patch(es)!", "Success");
         }
         catch (Exception ex)
         {
             StatusTextBlock.Text = "Error occurred while applying patches.";
-            MessageBox.Show($"Error applying patches:\n\n{ex.Message}", "Error",
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"Error applying patches:\n\n{ex.Message}", "Error");
         }
         finally
         {

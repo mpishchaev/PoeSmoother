@@ -4,21 +4,28 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Dark Theme Colors -->
-        <SolidColorBrush x:Key="DarkBackground" Color="#1E1E1E"/>
-        <SolidColorBrush x:Key="DarkSurface" Color="#2D2D30"/>
-        <SolidColorBrush x:Key="DarkBorder" Color="#3F3F46"/>
-        <SolidColorBrush x:Key="DarkTextPrimary" Color="#E0E0E0"/>
-        <SolidColorBrush x:Key="DarkTextSecondary" Color="#B0B0B0"/>
-        <SolidColorBrush x:Key="AccentBlue" Color="#0D7ACC"/>
-        <SolidColorBrush x:Key="AccentBlueHover" Color="#1C86D8"/>
+        <SolidColorBrush x:Key="DarkBackground" Color="#1E1E1E" />
+        <SolidColorBrush x:Key="DarkSurface" Color="#2D2D30" />
+        <SolidColorBrush x:Key="DarkBorder" Color="#3F3F46" />
+        <SolidColorBrush x:Key="DarkTextPrimary" Color="#E0E0E0" />
+        <SolidColorBrush x:Key="DarkTextSecondary" Color="#B0B0B0" />
+        <SolidColorBrush x:Key="DarkTextDisabled" Color="#808080" />
+        <SolidColorBrush x:Key="ButtonBlue" Color="#3275C2" />
+        <SolidColorBrush x:Key="ButtonBlueHover" Color="#5992D4" />
+        <SolidColorBrush x:Key="ButtonGray" Color="#3E3E42" />
+        <SolidColorBrush x:Key="ButtonGrayHover" Color="#505055" />
+        <SolidColorBrush x:Key="ButtonDisabled" Color="#4A4A4A" />
+        <SolidColorBrush x:Key="SliderTrack" Color="#4A4A4A" />
+        <SolidColorBrush x:Key="SliderThumb" Color="#8A8A8A" />
+        <SolidColorBrush x:Key="SliderThumbHover" Color="#B0B0B0" />
         
         <Style TargetType="Button">
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="4"/>
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource ButtonBlue}"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkTextPrimary}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -34,21 +41,21 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AccentBlueHover}"/>
+                    <Setter Property="Background" Value="{StaticResource ButtonBlueHover}"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="#4A4A4A"/>
-                    <Setter Property="Foreground" Value="#808080"/>
+                    <Setter Property="Background" Value="{StaticResource ButtonDisabled}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DarkTextDisabled}"/>
                     <Setter Property="Cursor" Value="Arrow"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="#3E3E42"/>
+            <Setter Property="Background" Value="{StaticResource ButtonGray}"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#505055"/>
+                    <Setter Property="Background" Value="{StaticResource ButtonGrayHover}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -65,17 +72,18 @@
                                     Width="14" 
                                     Height="14" 
                                     Background="{StaticResource DarkSurface}" 
-                                    BorderBrush="#686868" 
+                                    BorderBrush="{StaticResource SliderThumb}" 
                                     BorderThickness="1" 
-                                    CornerRadius="2"
+                                    CornerRadius="7"
                                     VerticalAlignment="Center">
-                                <Path x:Name="CheckMark"
-                                      Data="M 2,6 L 5,9 L 11,3"
-                                      Stroke="{StaticResource AccentBlue}"
-                                      StrokeThickness="2"
-                                      Visibility="Collapsed"
-                                      StrokeStartLineCap="Round"
-                                      StrokeEndLineCap="Round"/>
+                                <Ellipse x:Name="CheckMark"
+                                         Width="8"
+                                         Height="8"
+                                         Stroke="{StaticResource ButtonBlue}"
+                                         StrokeThickness="4"
+                                         Visibility="Collapsed"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
                             </Border>
                             <ContentPresenter Margin="6,0,0,0" 
                                             VerticalAlignment="Center"
@@ -84,18 +92,18 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="CheckBoxBorder" Property="Background" Value="#3E3E42"/>
+                                <Setter TargetName="CheckBoxBorder" Property="Background" Value="{StaticResource ButtonGray}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="#8A8A8A"/>
+                                <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="{StaticResource SliderThumb}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="CheckBoxBorder" Property="Background" Value="#252526"/>
+                                <Setter TargetName="CheckBoxBorder" Property="Background" Value="{StaticResource DarkBackground}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="#808080"/>
-                                <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="#4A4A4A"/>
-                                <Setter TargetName="CheckMark" Property="Stroke" Value="#606060"/>
+                                <Setter Property="Foreground" Value="{StaticResource DarkTextDisabled}"/>
+                                <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="{StaticResource SliderTrack}"/>
+                                <Setter TargetName="CheckMark" Property="Stroke" Value="{StaticResource DarkTextDisabled}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -104,13 +112,30 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Padding" Value="4,0"/>
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="Background" Value="{StaticResource DarkSurface}"/>
             <Setter Property="Foreground" Value="{StaticResource DarkTextPrimary}"/>
             <Setter Property="BorderBrush" Value="{StaticResource DarkBorder}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CaretBrush" Value="{StaticResource DarkTextPrimary}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"
+                                Height="{TemplateBinding Height}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style TargetType="GroupBox">
@@ -126,8 +151,9 @@
         </Style>
 
         <Style TargetType="ProgressBar">
-            <Setter Property="Foreground" Value="{StaticResource AccentBlue}"/>
-            <Setter Property="Background" Value="#3F3F46"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonBlue}"/>
+            <Setter Property="Background" Value="{StaticResource DarkSurface}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource DarkBorder}"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
@@ -140,14 +166,14 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
                         <Grid>
-                            <Ellipse x:Name="ThumbCircle" Fill="#8A8A8A" Stroke="#B0B0B0" StrokeThickness="0.5"/>
+                            <Ellipse x:Name="ThumbCircle" Fill="{StaticResource SliderThumb}" Stroke="{StaticResource SliderThumbHover}" StrokeThickness="0.5"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ThumbCircle" Property="Fill" Value="#9A9A9A"/>
+                                <Setter TargetName="ThumbCircle" Property="Fill" Value="{StaticResource SliderThumb}"/>
                             </Trigger>
                             <Trigger Property="IsDragging" Value="True">
-                                <Setter TargetName="ThumbCircle" Property="Fill" Value="#B0B0B0"/>
+                                <Setter TargetName="ThumbCircle" Property="Fill" Value="{StaticResource SliderThumbHover}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -172,15 +198,15 @@
                     <ControlTemplate TargetType="{x:Type Slider}">
                         <Grid Margin="0">
                             <!-- Base track background -->
-                            <Border Height="4" Background="#4A4A4A" CornerRadius="2" VerticalAlignment="Center"/>
+                            <Border Height="4" Background="{StaticResource SliderTrack}" CornerRadius="2" VerticalAlignment="Center"/>
                             <Track x:Name="PART_Track" VerticalAlignment="Center">
                                 <!-- Filled portion (left of thumb) -->
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource SliderTrackRepeatButton}" Background="#8A8A8A"/>
+                                    <RepeatButton Style="{StaticResource SliderTrackRepeatButton}" Background="{StaticResource SliderThumb}"/>
                                 </Track.DecreaseRepeatButton>
                                 <!-- Unfilled portion (right of thumb) -->
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource SliderTrackRepeatButton}" Background="#00000000"/>
+                                    <RepeatButton Style="{StaticResource SliderTrackRepeatButton}" Background="Transparent"/>
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
                                     <Thumb Style="{StaticResource RoundThumbStyle}"/>
@@ -197,7 +223,7 @@
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="PART_Track" Property="Opacity" Value="0.5"/>
+                                <Setter TargetName="PART_Track" Property="Opacity" Value="0.7"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -210,14 +236,15 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border Background="#686868" CornerRadius="3"/>
+                        <Border Background="{StaticResource SliderThumb}" CornerRadius="3"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <Style TargetType="{x:Type ScrollBar}">
-            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="4,0,0,0"/>
             <Setter Property="Width" Value="8"/>
             <Setter Property="MinWidth" Value="8"/>
             <Setter Property="Template">
@@ -252,16 +279,19 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                        <Border x:Name="ItemBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Border x:Name="ItemBorder" 
+                                Background="{TemplateBinding Background}" 
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="3">
                             <ContentPresenter VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="True">
-                                <Setter TargetName="ItemBorder" Property="Background" Value="#3E3E42"/>
+                                <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource ButtonGray}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource AccentBlue}"/>
-                                <Setter Property="Foreground" Value="White"/>
+                                <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource ButtonBlue}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DarkTextPrimary}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" Value="0.6"/>
@@ -369,12 +399,6 @@
                             </Popup>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
-                            </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" Value="0.6"/>
                             </Trigger>
