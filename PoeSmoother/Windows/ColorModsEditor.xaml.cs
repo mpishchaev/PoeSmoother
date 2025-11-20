@@ -44,6 +44,89 @@ public partial class ColorModsEditor : Window
         Close();
     }
 
+    private void SaveConfigButton_Click(object sender, RoutedEventArgs e)
+    {
+        var colorMods = ColorModsItemsControl.ItemsSource as ObservableCollection<ColorModsViewModel>;
+        if (colorMods == null)
+        {
+            MessageBox.Show("No color mods to save.", "Error");
+            return;
+        }
+        var saveFileDialog = new Microsoft.Win32.SaveFileDialog
+        {
+            Filter = "JSON Files (*.json)|*.json",
+            DefaultExt = ".json",
+            FileName = "color_mods.json"
+        };
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            var colorModsDict = new Dictionary<string, object>();
+            foreach (var mod in colorMods)
+            {
+                colorModsDict[mod.Name] = new
+                {
+                    enabled = mod.IsSelected,
+                    color = mod.SelectedColor,
+                };
+            }
+            var options = new System.Text.Json.JsonSerializerOptions 
+            { 
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+            var json = System.Text.Json.JsonSerializer.Serialize(colorModsDict, options);
+            System.IO.File.WriteAllText(saveFileDialog.FileName, json);
+            MessageBox.Show("Color mods saved successfully.", "Success");
+        }
+    }
+
+    private void LoadConfigButton_Click(object sender, RoutedEventArgs e)
+    {
+        var colorMods = ColorModsItemsControl.ItemsSource as ObservableCollection<ColorModsViewModel>;
+        if (colorMods == null)
+        {
+            MessageBox.Show("No color mods to load.", "Error");
+            return;
+        }
+        var openFileDialog = new Microsoft.Win32.OpenFileDialog
+        {
+            Filter = "JSON Files (*.json)|*.json",
+            DefaultExt = ".json",
+        };
+        if (openFileDialog.ShowDialog() == true)
+        {
+            try
+            {
+                var json = System.IO.File.ReadAllText(openFileDialog.FileName);
+                var colorModsDict = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, System.Text.Json.JsonElement>>>(json);
+                if (colorModsDict != null)
+                {
+                    foreach (var mod in colorMods)
+                    {
+                        if (colorModsDict.TryGetValue(mod.Name, out var modData))
+                        {
+                            if (modData.TryGetValue("enabled", out var enabledObj) 
+                                && enabledObj.ValueKind == System.Text.Json.JsonValueKind.True || enabledObj.ValueKind == System.Text.Json.JsonValueKind.False)
+                            {
+                                mod.IsSelected = enabledObj.GetBoolean();
+                            }
+                            if (modData.TryGetValue("color", out var colorObj) 
+                                && colorObj.ValueKind == System.Text.Json.JsonValueKind.String)
+                            {
+                                mod.SelectedColor = colorObj.GetString() ?? string.Empty;
+                            }
+                        }
+                    }
+                    MessageBox.Show("Color mods loaded successfully.", "Success");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load color mods: {ex.Message}", "Error");
+            }
+        }
+    }
+
     public static bool Show(ObservableCollection<ColorModsViewModel> colorMods)
     {
         var dialog = new ColorModsEditor(colorMods);
